@@ -5,35 +5,7 @@ import home from "../assets/home.svg";
 import saved from "../assets/bookmark.svg";
 import rocket from "../assets/rocket.svg";
 
-export default function Sidebar() {
-  const [chats, setChats] = useState([
-    { id: 1, name: "Indian trademark", selected: true, history: [] },
-    { id: 2, name: "Rent regulations", selected: false, history: [] },
-  ]);
-
-  const handleNewChat = () => {
-    const newChatName = prompt("Enter the name of the new chat:");
-    if (newChatName) {
-      const newChat = {
-        id: chats.length + 1,
-        name: newChatName,
-        selected: false,
-        history: [],
-      };
-      setChats((prevChats) => [...prevChats, newChat]);
-    }
-  };
-
-  const handleChatSelection = (chatId) => {
-    setChats((prevChats) =>
-      prevChats.map((chat) =>
-        chat.id === chatId
-          ? { ...chat, selected: true }
-          : { ...chat, selected: false }
-      )
-    );
-  };
-
+export default function Sidebar({ chats, handleChatSelection, handleNewChat }) {
   return (
     <>
       <div className="sideBar">

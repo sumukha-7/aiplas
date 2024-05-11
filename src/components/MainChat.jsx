@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userIcon from "../assets/user-icon.png";
 import botLogo from "../assets/bot-logo.png";
 import UserInput from "./UserInput";
 
-export default function MainChat() {
-  const [chatHistory, setChatHistory] = useState([
-    {
-      sender: "bot",
-      message: "Welcome to Counsel.ai. How can I assist you today?",
-    },
-  ]);
+export default function MainChat({ chat, updateMainChat }) {
+  const [chatHistory, setChatHistory] = useState([]);
+
+  useEffect(() => {
+    if (chat) {
+      setChatHistory(chat.history);
+    }
+  }, [chat]);
 
   const handleUserInput = (userMessage) => {
     setChatHistory((prevChatHistory) => [
@@ -24,6 +25,8 @@ export default function MainChat() {
       ...prevChatHistory,
       { sender: "bot", message: botResponse },
     ]);
+
+    updateMainChat(chat.id, chatHistory);
   };
 
   return (
