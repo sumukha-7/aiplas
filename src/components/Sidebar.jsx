@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
 import addBtn from "../assets/add-30.png";
 import msgIcon from "../assets/message.svg";
 import home from "../assets/home.svg";

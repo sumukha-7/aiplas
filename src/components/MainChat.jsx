@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 import userIcon from "../assets/user-icon.png";
 import botLogo from "../assets/bot-logo.png";
 import UserInput from "./UserInput";
@@ -18,7 +19,6 @@ export default function MainChat({ chat, updateMainChat }) {
       { sender: "user", message: userMessage },
     ]);
 
-    // Bot response
     const botResponse = "Hello";
 
     setChatHistory((prevChatHistory) => [
@@ -26,7 +26,11 @@ export default function MainChat({ chat, updateMainChat }) {
       { sender: "bot", message: botResponse },
     ]);
 
-    updateMainChat(chat.id, chatHistory);
+    updateMainChat(chat.id, [
+      ...chatHistory,
+      { sender: "user", message: userMessage },
+      { sender: "bot", message: botResponse },
+    ]);
   };
 
   return (
