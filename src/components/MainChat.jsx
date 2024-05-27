@@ -13,24 +13,35 @@ export default function MainChat({ chat, updateMainChat }) {
     }
   }, [chat]);
 
-  const handleUserInput = (userMessage) => {
+  const handleUserInput = async (userMessage) => {
     setChatHistory((prevChatHistory) => [
       ...prevChatHistory,
       { sender: "user", message: userMessage },
     ]);
 
-    const botResponse = "Hello";
+    try {
+      const response = await fetch("http://localhost:3002/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: userMessage }),
+      });
+      const data = await response.json();
 
-    setChatHistory((prevChatHistory) => [
-      ...prevChatHistory,
-      { sender: "bot", message: botResponse },
-    ]);
+      setChatHistory((prevChatHistory) => [
+        ...prevChatHistory,
+        { sender: "bot", message: data.response },
+      ]);
 
-    updateMainChat(chat.id, [
-      ...chatHistory,
-      { sender: "user", message: userMessage },
-      { sender: "bot", message: botResponse },
-    ]);
+      updateMainChat(chat.id, [
+        ...chatHistory,
+        { sender: "user", message: userMessage },
+        { sender: "bot", message: data.response },
+      ]);
+    } catch (error) {
+      console.error("Error fetching bot response:", error);
+    }
   };
 
   return (

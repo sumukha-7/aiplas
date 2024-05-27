@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 import addBtn from "../assets/add-30.png";
 import msgIcon from "../assets/message.svg";
-import home from "../assets/home.svg";
-import saved from "../assets/bookmark.svg";
-import rocket from "../assets/rocket.svg";
 
 export default function Sidebar({ chats, handleChatSelection, handleNewChat }) {
   return (
@@ -28,20 +25,6 @@ export default function Sidebar({ chats, handleChatSelection, handleNewChat }) {
                 {chat.name}
               </button>
             ))}
-          </div>
-        </div>
-        <div className="lowerSide">
-          <div className="listItems">
-            <img src={home} alt="" className="listItemImg" />
-            Home
-          </div>
-          <div className="listItems">
-            <img src={saved} alt="" className="listItemImg" />
-            Saved
-          </div>
-          <div className="listItems">
-            <img src={rocket} alt="" className="listItemImg" />
-            Upgrade
           </div>
         </div>
       </div>
